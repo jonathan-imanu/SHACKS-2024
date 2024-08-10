@@ -200,14 +200,26 @@ function App() {
 
       {/* Tasks Section */}
       <div id="tasks" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Tasks</h2>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Details about tasks go here...</p>
+        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">Tasks</h2>        
+        <div class="flex items-center mb-4">
+            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+            <label for="default-checkbox" class="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Change your password once every month</label>
+        </div>
+        <div class="flex items-center">
+            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+            <label for="checked-checkbox" class="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Enable two factor authentication (2FA)</label>
+        </div>
+        
       </div>
 
       {/* Links Section */}
       <div id="links" className="bg-gray-700 min-h-screen flex flex-col justify-center items-center">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Links</h2>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Useful links and resources go here...</p>
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Scotiabank Links</h2>
+        <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://www.scotiabank.com/ca/en/security/report-an-incident-or-suspicious-activity.html'>Report Fraud</a>
+        <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://www.scotiabank.com/ca/en/security.html'>Fraud Resource Hub</a>
+        <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://www.scotiabank.com/ca/en/personal/bank-your-way/digital-banking-guide/banking-basics/scotia-fraud-alerts.html'>Fraud Alerts</a>
+        <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://enrichedthinking.scotiawealthmanagement.com/2023/10/31/protecting-yourself-against-fraud/'>Fraud Protection</a>
+        <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://help.scotiabank.com/category/fraud?origin=dotcom_help'>Help Centre</a>
       </div>
     </>
   );
