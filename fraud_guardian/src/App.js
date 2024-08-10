@@ -1,7 +1,33 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 function App() {
+  const [file, setFile] = useState()
+
+  function handleFile(event) {
+    setFile(event.target.files[0])
+  }
+
+  function handleUpload() {
+    const formData = new FormData()
+    formData.append('file', file)
+    fetch(
+      'url',
+      {
+        method: "POST",
+        body: formData
+      }
+    ).then((response) => response.json()).then(
+      (result) => {
+        console.log('success', result)
+      }
+    )
+    .catch(error => {
+      console.error("Error:", error)
+    })
+  }
+
   useEffect(() => {
     // Function to handle smooth scroll
     const handleSmoothScroll = (event) => {
@@ -19,17 +45,31 @@ function App() {
 
     // Adding event listeners to links
     const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(link => {
+    links.forEach((link) => {
       link.addEventListener('click', handleSmoothScroll);
     });
 
     // Cleanup event listeners on component unmount
     return () => {
-      links.forEach(link => {
+      links.forEach((link) => {
         link.removeEventListener('click', handleSmoothScroll);
       });
     };
   }, []);
+
+  // Animation variants for Fraud Prevention Tips
+  const tipVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.3,
+        type: 'spring',
+        stiffness: 50,
+      },
+    }),
+  };
 
   return (
     <>
@@ -74,14 +114,31 @@ function App() {
         <form className="w-full max-w-4xl">
           <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
             <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
-            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                       <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 20">
-                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6"/>
-                        </svg>
-                       <span class="sr-only">Attach file</span>
-                   </button>
+              <form onSubmit={handleUpload}>
+              <div className="flex items-center space-x-2">
+              <div className="relative">
+                <input 
+                  type="file" 
+                  id="file-upload" 
+                  name="file" 
+                  onChange={handleFile} 
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+                <label 
+                  htmlFor="file-upload" 
+                  className="inline-block px-2 py-1 text-sm text-white bg-blue-700 rounded-lg cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  Choose File
+                </label>
+              </div>
+              {file && (
+                <span className="text-sm text-gray-300">
+                  {file.name}
+                </span>
+              )}
             </div>
-            
+              </form>
+            </div>
             <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
               <textarea
                 id="editor"
@@ -91,7 +148,7 @@ function App() {
                 required
               ></textarea>
             </div>
-          </div>      
+          </div>
 
           <button
             type="submit"
@@ -110,14 +167,35 @@ function App() {
               <span className="text-xl font-medium text-blue-700 dark:text-white">Most likely fraud</span>
             </div>
           </div>
-          
-        </form>  
+        </form>
       </div>
 
       {/* Fraud Prevention Section */}
       <div id="fraud-prevention" className="bg-gray-700 min-h-screen flex flex-col justify-center items-center">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Fraud Prevention</h2>
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Details about fraud prevention strategies go here...</p>
+        <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Fraud Prevention Tips</h2>
+        <div className="mt-4 space-y-4">
+          {[
+            "Your bank would never call you to ask for personal information.",
+            "Your bank would never ask you to keep a secret or be dishonest.",
+            "Your bank would never threaten to cancel your services and ask to remote into your device.",
+            "Your bank would never try to rush you into doing something.",
+            "Your bank would never ask you to help with an investigation.",
+            "Your bank would never ask you to purchase gift cards or cryptocurrency.",
+            "Your bank would never ask you to transfer money as part of an investigation.",
+            "Your bank would never request access to your computer.",
+          ].map((tip, index) => (
+            <motion.p
+              key={index}
+              className="text-lg text-gray-600 dark:text-gray-300 text-center"
+              custom={index}
+              initial="hidden"
+              animate="visible"
+              variants={tipVariants}
+            >
+              {tip}
+            </motion.p>
+          ))}
+        </div>
       </div>
 
       {/* Tasks Section */}
