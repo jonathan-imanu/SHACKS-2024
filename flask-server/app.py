@@ -2,14 +2,14 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import datetime
 from langdetect import detect
-
+import csv
 from dotenv import load_dotenv
 import os
 import boto3
 from openai import OpenAI
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 load_dotenv()
 
@@ -24,8 +24,6 @@ textract = boto3.client(
     region_name=region_name
 )
 
-app = Flask(__name__)
-CORS(app)
 
 def extract_text_from_image(image_path):
     with open(image_path, 'rb') as document:
@@ -40,6 +38,14 @@ def extract_text_from_image(image_path):
 
     return extracted_text.strip()
 
+def addToDatabase(data):
+    message = data["message"]
+    scam_rating = data["number"]  
+    with open('scam_records.csv', 'a', newline='') as csvfile:
+        fieldnames = ["message", "number"] 
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writerow({"message": message, "number": scam_rating, "language": detect(message)}) 
+
 
 @app.route('/data', methods=["POST"])
 def check_fraud():
@@ -51,11 +57,15 @@ def check_fraud():
     # Translate the prompt if necessary (simple example for English and Spanish)
     if detected_language == 'es':
         prompt = (
-            f"Califique la probabilidad de que el siguiente mensaje sea fraudulento en una escala del 1 al 100, donde 1 es "muy improbable" y 100 es "muy probable". Proporcione la calificación seguida de un punto y una explicación, en el mismo idioma que el final. de este mensaje.\n\n{user_input}"
+            f"Responde en el idioma en que termina este mensaje. ¿Qué tan probable es que lo siguiente sea un fraude? "
+            f"Por favor califícalo en una escala del 1 al 100, donde 1 es 'muy improbable' y 100 es 'muy probable'. "
+            f"Proporciona la calificación seguida de un punto y luego una explicación.\n\n{user_input}"
         )
     else:  # Default to English
         prompt = (
-            f"Rate the likelihood of the following message being fraudulent on a scale of 1 to 100, where 1 is 'very unlikely' and 100 is 'very likely'.Provide the rating followed by a period and an explanation, in the same language as the end of this prompt. \n\n{user_input}"
+            f"Respond with the language that this message ends in. How likely is the following to be fraud? "
+            f"Please rate it on a scale of 1 to 100, where 1 is 'very unlikely' and 100 is 'very likely'. "
+            f"Provide the rating followed by a period then an explanation.\n\n{user_input}"
         )
 
     client = OpenAI(
@@ -75,8 +85,9 @@ def check_fraud():
     parts = chat_completion.choices[0].message.content.split('. ', 1)
     number = parts[0]
     message = parts[1]
-
-    return {"number": number, "message": message}
+    result = {"number": number, "message": message}
+    addToDatabase(result)
+    return result
 
 
 if __name__ == '__main__':
