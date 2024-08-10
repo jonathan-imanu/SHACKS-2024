@@ -95,7 +95,7 @@ function App() {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed top-0 left-0 w-full z-50">
+      <nav className="bg-white border-gray-200 dark:bg-red-700 fixed top-0 left-0 w-full z-50">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="images/logo.png" className="h-8" alt="Logo" />
@@ -114,7 +114,7 @@ function App() {
             </svg>
           </button>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-red-700 dark:border-gray-700">
               <li>
                 <a href="#home" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
               </li>
@@ -132,9 +132,9 @@ function App() {
         </div>
       </nav>
 
-      <div id="home" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
+      <div id="home" className="bg-gray-200 min-h-screen flex flex-col justify-center items-center">
         <form className="w-full max-w-4xl" onSubmit={handleSubmit} method="POST">
-          <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+          <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-red-700 dark:border-gray-600">
             <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
               <form onSubmit={handleUpload}>
               <div className="flex items-center space-x-2">
@@ -148,7 +148,7 @@ function App() {
                 />
                 <label 
                   htmlFor="file-upload" 
-                  className="inline-block px-2 py-1 text-sm text-white bg-blue-700 rounded-lg cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                  className="inline-block px-2 py-1 text-sm text-white bg-gray-500 rounded-lg cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
                   Choose File
                 </label>
@@ -160,6 +160,15 @@ function App() {
               )}
             </div>
               </form>
+              <label
+                  className="inline-block px-2 py-1 text-sm text-white bg-red-700 rounded-lg cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                      <path d="M10.836.357a1.978 1.978 0 0 0-2.138.3L3.63 5H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1.63l5.07 4.344a1.985 1.985 0 0 0 2.142.299A1.98 1.98 0 0 0 12 15.826V2.174A1.98 1.98 0 0 0 10.836.357Zm2.728 4.695a1.001 1.001 0 0 0-.29 1.385 4.887 4.887 0 0 1 0 5.126 1 1 0 0 0 1.674 1.095A6.645 6.645 0 0 0 16 9a6.65 6.65 0 0 0-1.052-3.658 1 1 0 0 0-1.384-.29Zm4.441-2.904a1 1 0 0 0-1.664 1.11A10.429 10.429 0 0 1 18 9a10.465 10.465 0 0 1-1.614 5.675 1 1 0 1 0 1.674 1.095A12.325 12.325 0 0 0 20 9a12.457 12.457 0 0 0-1.995-6.852Z"/>
+                  </svg>
+                  <span class="sr-only">TTS</span>
+                </label>
+                
             </div>
             <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
               <textarea
@@ -174,7 +183,7 @@ function App() {
 
           <button
             type="submit"
-            className="inline-flex items-center px-6 py-3 text-m font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+            className="inline-flex items-center px-6 py-3 text-m font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
           >
             Submit
           </button>
@@ -188,19 +197,19 @@ function App() {
 
           {/* Progress Bar Section */}
           <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
-            <div className="bg-blue-600 h-6 rounded-full" style={{ width: '45%' }}></div>
+            <div className="bg-red-700 h-6 rounded-full" style={{ width: '45%' }}></div>
             <div className="absolute inset-0 flex items-center justify-between px-3">
               <span className="text-m font-medium text-blue-700 dark:text-white">45%</span>
             </div>
             <div className="absolute inset-x-0 bottom-[-2rem] flex justify-center">
-              <span className="text-xl font-medium text-blue-700 dark:text-white">Most likely fraud</span>
+              <span className="text-xl font-medium text-red-700 dark:text-red">Most likely fraud</span>
             </div>
           </div>
         </form>
       </div>
 
       {/* Fraud Prevention Section */}
-      <div id="fraud-prevention" className="bg-gray-700 min-h-screen flex flex-col justify-center items-center">
+      <div id="fraud-prevention" className="bg-orange-700 min-h-screen flex flex-col justify-center items-center">
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Fraud Prevention Tips</h2>
         <div className="mt-4 space-y-4">
           {[
@@ -228,50 +237,50 @@ function App() {
       </div>
 
       {/* Tasks Section */}
-      <div id="tasks" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
-        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">Tasks</h2> 
+      <div id="tasks" className="bg-gray-200 min-h-screen flex flex-col justify-center items-center">
+        <h2 className="text-4xl font-bold text-red-700 dark:text-red mb-8">Tasks</h2> 
         <div class="w-3/4 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-          <div class="bg-red-600 h-1.5 rounded-full dark:bg-blue-500" style={{ width: '45%' }}></div>
+          <div class="bg-red-600 h-1.5 rounded-full dark:bg-red-700" style={{ width: '45%' }}></div>
         </div>       
         
         <div className="flex items-center mb-4">
           <input id="password-change-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="password-change-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Change your password once every month</label>
+          <label htmlFor="password-change-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Change your password once every month</label>
         </div>
         
         <div className="flex items-center mb-4">
           <input id="2fa-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="2fa-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Enable two-factor authentication (2FA)</label>
+          <label htmlFor="2fa-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Enable two-factor authentication (2FA)</label>
         </div>
         
         <div className="flex items-center mb-4">
           <input id="software-updates-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="software-updates-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Keep your software and operating systems up to date</label>
+          <label htmlFor="software-updates-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Keep your software and operating systems up to date</label>
         </div>
         
         <div className="flex items-center mb-4">
           <input id="secure-network-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="secure-network-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Use secure networks (avoid public Wi-Fi for sensitive transactions)</label>
+          <label htmlFor="secure-network-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Use secure networks (avoid public Wi-Fi for sensitive transactions)</label>
         </div>
         
         <div className="flex items-center mb-4">
           <input id="data-backup-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="data-backup-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Regularly backup your important data</label>
+          <label htmlFor="data-backup-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Regularly backup your important data</label>
         </div>
         
         <div className="flex items-center mb-4">
           <input id="strong-password-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="strong-password-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Use strong, unique passwords for different accounts</label>
+          <label htmlFor="strong-password-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Use strong, unique passwords for different accounts</label>
         </div>
 
         <div className="flex items-center mb-4">
           <input id="phishing-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-          <label htmlFor="phishing-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Be cautious of phishing attempts and avoid clicking on suspicious links</label>
+          <label htmlFor="phishing-checkbox" className="ms-2 text-lg font-medium text-red-700 dark:text-red-700">Be cautious of phishing attempts and avoid clicking on suspicious links</label>
         </div>
       </div>
 
       {/* Links Section */}
-      <div id="links" className="bg-gray-700 min-h-screen flex flex-col justify-center items-center">
+      <div id="links" className="bg-orange-700 min-h-screen flex flex-col justify-center items-center">
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Scotiabank Links</h2>
         <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://www.scotiabank.com/ca/en/security/report-an-incident-or-suspicious-activity.html'>Report Fraud</a>
         <a className="mt-4 text-xl text-gray-600 dark:text-gray-300 hover:text-blue-900" href='https://www.scotiabank.com/ca/en/security.html'>Fraud Resource Hub</a>
