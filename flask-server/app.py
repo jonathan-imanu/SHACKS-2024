@@ -52,7 +52,7 @@ def check_fraud():
         messages=[
             {
                 "role": "user",
-                "content": f"How likely is the following to be fraud? Please rate it on a scale of 1 to 100, where 1 is 'very unlikely' and 100 is 'very likely'. Provide the rating followed by a period then an explanation. If the user input is in a different language respond in that language. \n\n{user_input}",
+                "content": f"Respond with the language that this message ends in. How likely is the following to be fraud? Please rate it on a scale of 1 to 100, where 1 is 'very unlikely' and 100 is 'very likely'. Provide the rating followed by a period then an explanation.\n\n{user_input}",
             }
         ],
         model="gpt-3.5-turbo",
