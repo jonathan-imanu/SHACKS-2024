@@ -4,12 +4,40 @@ import datetime
 
 from dotenv import load_dotenv
 import os
+import boto3
 from openai import OpenAI
 
 app = Flask(__name__)
 CORS(app)
 
 load_dotenv()
+
+aws_access_key_id = '****'
+aws_secret_access_key = '****'
+region_name = 'us-east-1' 
+
+textract = boto3.client(
+    'textract',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name
+)
+
+app = Flask(__name__)
+CORS(app)
+
+def extract_text_from_image(image_path):
+    with open(image_path, 'rb') as document:
+        image_bytes = document.read()
+
+    response = textract.detect_document_text(Document={'Bytes': image_bytes})
+
+    extracted_text = ""
+    for item in response["Blocks"]:
+        if item["BlockType"] == "LINE":
+            extracted_text += item["Text"] + " "
+
+    return extracted_text.strip()
 
 # @app.route('/data', methods=["POST"])
 # def get_time():
