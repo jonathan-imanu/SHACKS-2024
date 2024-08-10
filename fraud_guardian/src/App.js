@@ -36,6 +36,8 @@ function App() {
   })
   .then((response) => {
       setData(response.data);
+      console.log(response.data);
+      setProgress(response.data.number);
   })
   .catch((err) => {
       setError(err.message);
@@ -251,25 +253,26 @@ function App() {
           </button>
 
           {error && <div style={{ color: 'blue' }}>Error: {error}</div>} {/* Error message in blue */}
-          {data && (
-            <div>
-              <pre className='text-yellow-400'>{JSON.stringify(data, null, 2)}</pre>
-            </div>
-          )}
+    
 
-          {/* Progress Bar Section */}
-          <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-500">
-            <div className="bg-red-700 h-6 rounded-full" style={{ width: `${progress}%` }}></div>
+            {/* Progress Bar Section */}
+            <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-500">
+            <div className="bg-red-700 h-6 rounded-full" style={{ width: '45%' }}></div>
             <div className="absolute inset-0 flex items-center justify-between px-3">
               <span className="text-m font-medium text-blue-700 dark:text-white">45%</span>
             </div>
-            <div className="absolute inset-x-0 bottom-[-2rem] flex justify-center">
-              <span className="text-xl font-medium text-red-700 dark:text-red">
-                {language === 'en' && 'Most likely fraud'}
-                {language === 'es' && 'Probablemente fraude'}
-                {language === 'fr' && 'Très probablement fraud'}
-              </span>
-            </div>
+            {/* Data rendering below the progress bar */}
+<div className="flex justify-center mt-4">
+  {data && data.message && (
+    <div className="mt-8 max-w-full px-4">
+      <span className="text-s font-medium text-center text-red-700 dark:text-red p-4 block">
+        <pre className="p-4 bg-gray-100 rounded overflow-x-auto">
+          {data.message}
+        </pre>
+      </span>
+    </div>
+  )}
+</div>
           </div>
         </form>
       </div>
