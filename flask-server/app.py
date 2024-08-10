@@ -50,11 +50,8 @@ def addToDatabase(data):
 @app.route('/data', methods=["POST"])
 def check_fraud():
     user_input = request.json.get('text')
-
-    # Detect the language of the user input
     detected_language = detect(user_input)
 
-    # Translate the prompt if necessary (simple example for English and Spanish)
     if detected_language == 'es':
         prompt = (
             f"Responde en el idioma en que termina este mensaje. ¿Qué tan probable es que lo siguiente sea un fraude? "
@@ -86,7 +83,7 @@ def check_fraud():
     number = parts[0]
     message = parts[1]
     result = {"number": number, "message": message}
-    addToDatabase(result)
+    # addToDatabase(result)
     return result
 
 
