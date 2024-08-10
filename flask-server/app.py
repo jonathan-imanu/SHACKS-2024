@@ -6,19 +6,20 @@ from dotenv import load_dotenv
 import os
 from openai import OpenAI
 
-
 app = Flask(__name__)
 CORS(app)
 
+load_dotenv()
+
+# @app.route('/data', methods=["POST"])
+# def get_time():
+#     x = datetime.datetime.now()
+#     return jsonify({'Date': x.isoformat()})
+
 @app.route('/data', methods=["POST"])
-def get_time():
-    x = datetime.datetime.now()
-    return jsonify({'Date': x.isoformat()})
-
-
-def check_fraud(user_input):
-    load_dotenv()
-
+def check_fraud():
+    user_input = request.json.get('text')
+    
     client = OpenAI(
         api_key=os.environ.get("OPENAI_API_KEY"),
     )
@@ -27,7 +28,7 @@ def check_fraud(user_input):
         messages=[
             {
                 "role": "user",
-                "content": f"How likely is the following to be fraud? Please rate it on a scale of 1 to 10, where 1 is 'very unlikely' and 10 is 'very likely'. Provide the rating followed by a period then an explanation.\n\n{user_input}",
+                "content": f"How likely is the following to be fraud? Please rate it on a scale of 1 to 100, where 1 is 'very unlikely' and 100 is 'very likely'. Provide the rating followed by a period then an explanation.\n\n{user_input}",
             }
         ],
         model="gpt-3.5-turbo",
