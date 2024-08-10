@@ -229,16 +229,45 @@ function App() {
 
       {/* Tasks Section */}
       <div id="tasks" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
-        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">Tasks</h2>        
-        <div class="flex items-center mb-4">
-            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label for="default-checkbox" class="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Change your password once every month</label>
-        </div>
-        <div class="flex items-center">
-            <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label for="checked-checkbox" class="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Enable two factor authentication (2FA)</label>
+        <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">Tasks</h2> 
+        <div class="w-3/4 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+          <div class="bg-red-600 h-1.5 rounded-full dark:bg-blue-500" style={{ width: '45%' }}></div>
+        </div>       
+        
+        <div className="flex items-center mb-4">
+          <input id="password-change-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="password-change-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Change your password once every month</label>
         </div>
         
+        <div className="flex items-center mb-4">
+          <input id="2fa-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="2fa-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Enable two-factor authentication (2FA)</label>
+        </div>
+        
+        <div className="flex items-center mb-4">
+          <input id="software-updates-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="software-updates-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Keep your software and operating systems up to date</label>
+        </div>
+        
+        <div className="flex items-center mb-4">
+          <input id="secure-network-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="secure-network-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Use secure networks (avoid public Wi-Fi for sensitive transactions)</label>
+        </div>
+        
+        <div className="flex items-center mb-4">
+          <input id="data-backup-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="data-backup-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Regularly backup your important data</label>
+        </div>
+        
+        <div className="flex items-center mb-4">
+          <input id="strong-password-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="strong-password-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Use strong, unique passwords for different accounts</label>
+        </div>
+
+        <div className="flex items-center mb-4">
+          <input id="phishing-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="phishing-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Be cautious of phishing attempts and avoid clicking on suspicious links</label>
+        </div>
       </div>
 
       {/* Links Section */}
