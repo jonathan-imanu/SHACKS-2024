@@ -12,9 +12,9 @@ CORS(app)
 
 load_dotenv()
 
-aws_access_key_id = '****'
-aws_secret_access_key = '****'
-region_name = 'us-east-1' 
+aws_access_key_id = os.environ.get("aws_access_key_id")
+aws_secret_access_key = os.environ.get("aws_secret_access_key")
+region_name = os.environ.get("region_name") 
 
 textract = boto3.client(
     'textract',
@@ -39,10 +39,6 @@ def extract_text_from_image(image_path):
 
     return extracted_text.strip()
 
-# @app.route('/data', methods=["POST"])
-# def get_time():
-#     x = datetime.datetime.now()
-#     return jsonify({'Date': x.isoformat()})
 
 @app.route('/data', methods=["POST"])
 def check_fraud():

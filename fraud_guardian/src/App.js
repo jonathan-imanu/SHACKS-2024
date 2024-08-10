@@ -22,6 +22,7 @@ function App() {
     axios.post('http://localhost:5000/data', { text: textareaValue })
       .then((response) => {
         setData(response.data);
+        setProgress(response.data.number)
       })
       .catch((err) => {
         setError(err.message);
