@@ -1,9 +1,31 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 function App() {
   const [file, setFile] = useState()
+  const [data, setData] = useState(null); 
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(false);
+  
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    setLoading(true);
+    setError(null); 
+    setData(null);
+
+    axios.post('http://localhost:5000/data', { key: 'value' })
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+      };
 
   function handleFile(event) {
     setFile(event.target.files[0])
@@ -111,7 +133,7 @@ function App() {
       </nav>
 
       <div id="home" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
-        <form className="w-full max-w-4xl">
+        <form className="w-full max-w-4xl" onSubmit={handleSubmit} method="POST">
           <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
             <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
               <form onSubmit={handleUpload}>
@@ -156,6 +178,13 @@ function App() {
           >
             Submit
           </button>
+
+          {error && <div style={{ color: 'blue' }}>Error: {error}</div>} {/* Error message in blue */}
+      {data && (
+        <div>
+          <pre className='text-yellow-400'>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+      )}
 
           {/* Progress Bar Section */}
           <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
