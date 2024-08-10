@@ -8,6 +8,7 @@ function App() {
   const [data, setData] = useState(null); 
   const [error, setError] = useState(null); 
   const [loading, setLoading] = useState(false);
+  const [textareaValue, setTextareaValue] = useState(''); 
   const [progress, setProgress] = useState(90);
   
   const handleSubmit = (event) => {
@@ -15,8 +16,10 @@ function App() {
     setLoading(true);
     setError(null); 
     setData(null);
-
-    axios.post('http://localhost:5000/data', { key: 'value' })
+  
+    console.log(textareaValue);  // Log the textarea value
+  
+    axios.post('http://localhost:5000/data', { text: textareaValue })
       .then((response) => {
         setData(response.data);
       })
@@ -26,7 +29,7 @@ function App() {
       .finally(() => {
         setLoading(false);
       });
-      };
+  };
 
   function handleFile(event) {
     setFile(event.target.files[0])
@@ -170,6 +173,8 @@ function App() {
                 className="block w-full px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                 placeholder="Input..."
                 required
+                value={textareaValue} 
+                onChange={(e) => setTextareaValue(e.target.value)} 
               ></textarea>
             </div>
           </div>
