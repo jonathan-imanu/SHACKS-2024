@@ -1,9 +1,31 @@
 import './App.css';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 function App() {
+  const [data, setData] = useState(null); 
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();  // Prevents the default form submission behavior
+    setLoading(true);
+    setError(null); 
+    setData(null);
+
+    axios.post('http://localhost:5000/data', { key: 'value' })
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+      };
+
   useEffect(() => {
-    // Function to handle smooth scroll
     const handleSmoothScroll = (event) => {
       event.preventDefault();
       const targetId = event.currentTarget.getAttribute('href').slice(1);
@@ -71,7 +93,7 @@ function App() {
       </nav>
 
       <div id="home" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
-        <form className="w-full max-w-4xl">
+        <form className="w-full max-w-4xl"  onSubmit={handleSubmit} method="POST">
           <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
             <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
             <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
@@ -89,7 +111,8 @@ function App() {
                 className="block w-full px-0 text-lg text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                 placeholder="Input..."
                 required
-              ></textarea>
+              >
+              </textarea>
             </div>
           </div>      
 
@@ -99,6 +122,13 @@ function App() {
           >
             Submit
           </button>
+
+          {error && <div style={{ color: 'blue' }}>Error: {error}</div>} {/* Error message in blue */}
+      {data && (
+        <div>
+          <pre className='text-yellow-400'>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+      )}
 
           {/* Progress Bar Section */}
           <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
@@ -132,7 +162,7 @@ function App() {
         <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Useful links and resources go here...</p>
       </div>
     </>
+    
   );
 }
-
 export default App;
