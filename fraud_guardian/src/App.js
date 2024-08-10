@@ -10,7 +10,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState('en'); // Default is English
   const [textareaValue, setTextareaValue] = useState(''); 
-  const [progress, setProgress] = useState(90);
+  const [progress, setProgress] = useState(0);
 
     
   const changeLanguage = (lang) => {
@@ -27,6 +27,10 @@ function App() {
       headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
+      }
+       onUploadProgress: (progressEvent) => {  // Add this part
+        const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        setProgress(percentCompleted);
       }
   })
   .then((response) => {
@@ -329,7 +333,7 @@ function App() {
         </h2>
 
         <div className="w-3/4 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-          <div className="bg-red-600 h-1.5 rounded-full dark:bg-red-700" style={{ width: '45%' }}></div>
+          <div className="bg-red-600 h-1.5 rounded-full dark:bg-red-700" style={{ width: '${progress}%' }}></div>
         </div>
 
         <div className="flex items-center mb-4">
