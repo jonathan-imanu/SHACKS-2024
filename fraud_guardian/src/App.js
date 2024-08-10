@@ -257,9 +257,9 @@ function App() {
 
             {/* Progress Bar Section */}
             <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-500">
-            <div className="bg-red-700 h-6 rounded-full" style={{ width: '45%' }}></div>
+            <div className="bg-red-700 h-6 rounded-full" style={{ width: `${progress}%` }}></div>
             <div className="absolute inset-0 flex items-center justify-between px-3">
-              <span className="text-m font-medium text-blue-700 dark:text-white">45%</span>
+              <span className="text-m font-medium text-blue-700 dark:text-white">{progress}%</span>
             </div>
             {/* Data rendering below the progress bar */}
 <div className="flex justify-center mt-4">
