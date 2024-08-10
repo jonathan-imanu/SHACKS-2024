@@ -8,6 +8,7 @@ function App() {
   const [data, setData] = useState(null); 
   const [error, setError] = useState(null); 
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(90);
   
   const handleSubmit = (event) => {
     event.preventDefault(); 
@@ -43,6 +44,7 @@ function App() {
     ).then((response) => response.json()).then(
       (result) => {
         console.log('success', result)
+        setProgress(result.progress);
       }
     )
     .catch(error => {
@@ -188,12 +190,14 @@ function App() {
 
           {/* Progress Bar Section */}
           <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
-            <div className="bg-blue-600 h-6 rounded-full" style={{ width: '45%' }}></div>
+          <div className="bg-blue-600 h-6 rounded-full" style={{ width: `${progress}%` }}></div>
             <div className="absolute inset-0 flex items-center justify-between px-3">
-              <span className="text-m font-medium text-blue-700 dark:text-white">45%</span>
+              <span className="text-m font-medium text-blue-700 dark:text-white">{progress}%</span>
             </div>
             <div className="absolute inset-x-0 bottom-[-2rem] flex justify-center">
-              <span className="text-xl font-medium text-blue-700 dark:text-white">Most likely fraud</span>
+              <span className="text-xl font-medium text-blue-700 dark:text-white">
+                {progress > 75 ? "High risk of fraud" : "Low risk of fraud"}
+              </span>
             </div>
           </div>
         </form>
@@ -230,10 +234,10 @@ function App() {
       {/* Tasks Section */}
       <div id="tasks" className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
         <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">Tasks</h2> 
-        <div class="w-3/4 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
-          <div class="bg-red-600 h-1.5 rounded-full dark:bg-blue-500" style={{ width: '45%' }}></div>
+        <div className="w-3/4 bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+          <div className="bg-red-600 h-1.5 rounded-full dark:bg-blue-500" style={{ width: '45%' }}></div>
         </div>       
-        
+
         <div className="flex items-center mb-4">
           <input id="password-change-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
           <label htmlFor="password-change-checkbox" className="ms-2 text-lg font-medium text-gray-900 dark:text-gray-300">Change your password once every month</label>
