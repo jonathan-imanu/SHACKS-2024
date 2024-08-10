@@ -1,3 +1,4 @@
+
 import './App.css';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
@@ -10,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [language, setLanguage] = useState('en'); // Default is English
   const [textareaValue, setTextareaValue] = useState(''); 
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(100);
 
     
   const changeLanguage = (lang) => {
@@ -27,8 +28,8 @@ function App() {
       headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
-      }
-       onUploadProgress: (progressEvent) => {  // Add this part
+      },
+      onUploadProgress: (progressEvent) => {  // Add this part
         const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
         setProgress(percentCompleted);
       }
@@ -258,7 +259,7 @@ function App() {
 
           {/* Progress Bar Section */}
           <div className="mt-8 relative w-full bg-gray-200 rounded-full h-6 dark:bg-gray-500">
-            <div className="bg-red-700 h-6 rounded-full" style={{ width: '45%' }}></div>
+            <div className="bg-red-700 h-6 rounded-full" style={{ width: `${progress}%` }}></div>
             <div className="absolute inset-0 flex items-center justify-between px-3">
               <span className="text-m font-medium text-blue-700 dark:text-white">45%</span>
             </div>
